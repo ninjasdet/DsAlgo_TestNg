@@ -1,0 +1,1 @@
+{"uuid":"cab7545a-52fe-420a-ab97-60b1cf61b32f","name":"base.TestBase.setUp","children":["d97c1663-364c-4689-9adf-1dedcabe9881"],"description":"","befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1740804450921,"stop":1740804454234}],"afters":[],"start":1740804450921,"stop":1740804454235}
