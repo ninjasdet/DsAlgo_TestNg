@@ -4,15 +4,23 @@
 <suite name="DsAlgo_TestNgSuite" >
       
   <listeners>
-  	<listener class-name="listeners.RetryAnalyzer"/>
+  	<listener class-name="listeners.RetryListener"/>
   	<listener class-name="listeners.ItestListener"/>
+  	
    	
   </listeners>
   
   <test name="ChromeTest" >
 	  <parameter name="browser" value="chrome"/>
       <classes>
-            <class name="testCases.LoginTests"/>
+           <!-- <class name="testCases.LoginTests"/>-->
+            <class name="testCases.DataStructureTests"/>
+            <class name="testCases.GraphTests">
+            <methods>
+                    <include name="testGraphGetStarted" />
+            </methods>
+            </class>
+            
         </classes>
     </test>
      
