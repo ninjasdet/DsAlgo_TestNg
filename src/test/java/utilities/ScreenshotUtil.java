@@ -2,27 +2,31 @@ package utilities;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestResult;
 
-import driverManager.DriverManager;
 
 public class ScreenshotUtil {
 	
-	 public static void takeScreenshot(ITestResult result) {
-		 WebDriver driver = DriverManager.getDriver();
-	        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-	        try {
-	            // Save the screenshot with the scenario name
-	            FileUtils.copyFile(screenshot, new File("target/screenshots/" + result.getName() + ".png"));
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
+	public static void takeScreenshot(WebDriver driver, String scenarioName) {
+        try {
+            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String screenshotPath = "screenshots/" + scenarioName + "_" + timestamp + ".png";
+
+            FileUtils.copyFile(srcFile, new File(screenshotPath));
+            System.out.println("Screenshot saved: " + screenshotPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 	
 }
+
 
 
