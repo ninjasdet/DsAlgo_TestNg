@@ -7,9 +7,9 @@ import java.util.Map;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.openqa.selenium.Alert;
 import org.testng.Assert;
-
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -32,7 +32,7 @@ public class StackTests extends TestBase {
 	ExcelReader reader = new ExcelReader();
 
 	
-	@BeforeSuite
+	@BeforeClass(alwaysRun = true)
 	public void beforeSuite() throws InvalidFormatException, IOException {
 		System.out.println("BeforeSuite: Setting up the config reader");
 		configReader = new ConfigReader();
@@ -41,7 +41,7 @@ public class StackTests extends TestBase {
 	}
 
 	@Parameters("browser")
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 
 	public void beforeMethod(@Optional("chrome") String browser) throws IOException, InvalidFormatException {
 		loginPage = new LoginPage();

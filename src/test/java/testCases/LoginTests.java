@@ -7,8 +7,9 @@ import java.util.Map;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.testng.Assert;
 import org.testng.ITestNGMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -17,7 +18,7 @@ import org.testng.annotations.Test;
 
 import utilities.ExcelReader;
 import utilities.LoggerLoad;
-import pages.HomePage;
+
 import pages.LoginPage;
 import base.TestBase;
 import utilities.ConfigReader;
@@ -30,7 +31,7 @@ public class LoginTests extends TestBase{
 	LoginPage loginPage;
 	List<Map<String,String>> excelData;
 
-	@BeforeSuite
+	@BeforeClass(alwaysRun = true)
 	public void beforeSuite() throws InvalidFormatException, IOException {
 		System.out.println("BeforeSuite: Setting up the config reader");
 		configReader=new ConfigReader();
@@ -39,7 +40,7 @@ public class LoginTests extends TestBase{
 	}
 
 	@Parameters("browser")
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 	public void beforeMethod(@Optional("chrome") String browser) {
 		loginPage= new LoginPage();
 		loginPage.getLoginBtnURL();
