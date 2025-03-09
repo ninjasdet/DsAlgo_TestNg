@@ -47,7 +47,7 @@ public class DataStructurePage {
 
 	// Constructor
 	public DataStructurePage() {
-		 
+
 		PageFactory.initElements(driver, this);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
@@ -97,16 +97,17 @@ public class DataStructurePage {
 		practiceQuestionsDsLnk.click();
 		LoggerLoad.info("User is navigated to practice questions page");
 	}
-	
-	public void getPracticequestionPage()
-	{
+
+	public void getPracticequestionPage() {
 		clickGetStarted();
 		clickTimeComplexity();
 		clickPracticeQuestions();
 	}
-	
-	 // Method to get the current URL
-    public String getCurrentUrl() {
-         return driver.getCurrentUrl();
-     }
+
+	// Method to get the current URL
+	public String getCurrentUrl() {
+		String currentUrl = driver.getCurrentUrl();
+		System.out.println("current url" + currentUrl);
+		return driver.getCurrentUrl();
+	}
 }

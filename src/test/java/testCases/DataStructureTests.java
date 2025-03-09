@@ -7,23 +7,19 @@ import java.util.Map;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.openqa.selenium.Alert;
 import org.testng.Assert;
-
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import base.TestBase;
-
 import pages.DataStructurePage;
-
 import pages.LoginPage;
 import pages.StackPage;
 import utilities.ConfigReader;
 import utilities.DataProviderClass;
 import utilities.ExcelReader;
-
+import utilities.LoggerLoad;
 public class DataStructureTests extends TestBase {
 
 	static ConfigReader configReader;
@@ -35,14 +31,14 @@ public class DataStructureTests extends TestBase {
 	List<Map<String, String>> excelData;
 	ExcelReader reader = new ExcelReader();
 
-	@BeforeSuite
+	@BeforeClass(alwaysRun = true)
 	public void beforeSuite() throws InvalidFormatException, IOException {
 		configReader = new ConfigReader();
 		excelData = reader.getData(ConfigReader.getProperty("excelPath"), "LoginValid");
 	}
 
 	@Parameters("browser")
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 	public void beforeMethod(@Optional("chrome") String browser) throws IOException, InvalidFormatException {
 		loginPage = new LoginPage();
 		dataStructure = new DataStructurePage();
@@ -52,9 +48,8 @@ public class DataStructureTests extends TestBase {
 			Map<String, String> firstRow = excelData.get(0); // Get the first row (index 0)
 			String username = firstRow.get("Username"); // Extract Username
 			String password = firstRow.get("Password"); // Extract Password
-
-			System.out.println("Username: " + username);
-			System.out.println("Password: " + password);
+			LoggerLoad.info("Username:" + username);
+		    LoggerLoad.info("Password: " + password);
 			loginPage.enterUsername(username);
 			loginPage.enterPassword(password);
 			loginPage.clickLogin();
@@ -104,8 +99,10 @@ public class DataStructureTests extends TestBase {
 			String actualOutput = stackPage.getConsoleOutput();
 			Assert.assertEquals(actualOutput, expectedOutput.trim(), "Output mismatch!");
 		}
-
-		// Assert.fail("Expected an alert with an error message, but no alert
-		// appeared.");
+		
+			
 	}
+	
+  
 }
+

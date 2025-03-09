@@ -76,7 +76,7 @@ public class GraphPage {
 		WebElement consoleOutput;
 
 		
-		private ExcelReader excelReader;
+		//private ExcelReader excelReader;
 		
 		public WebDriver driver = DriverManager.getDriver();
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -99,45 +99,13 @@ public class GraphPage {
 	    
 		// constructor creation
 		public GraphPage() {
-			 this.driver = DriverManager.getDriver();
-			 if (this.driver == null) {
-		            throw new IllegalStateException("WebDriver is null in GraphPage!");
-		        }
+			
 			PageFactory.initElements(driver, this);
-			// Initialize ExcelReader
-	        try {
-	            this.excelReader = new ExcelReader(); // Excel file path
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+			wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
 	    }
 		
-//		// Method to enter code into the editor and click the Run button
-//	    public void enterCodeAndRun(String sheetName, int rowNumber) {
-//	        try {
-//	            // Fetch data from Excel using ExcelReader
-//	            String codeToEnter = excelReader.getCellData(sheetName, rowNumber - 1, 0); // Assuming column 0
-//
-//	            WebElement textarea=wait.until(ExpectedConditions.elementToBeClickable(textareaelement));
-//	            // Enter the code into the editor
-//	            textarea.clear();
-//	            textarea.sendKeys(codeToEnter);
-//
-//	            // Click the Run button
-//	            runButton.click();
-//	        } catch (Exception e) {
-//	            e.printStackTrace();
-//	        }
-//	    }
-//	    //method to test valid scenario
-//	    public void validinputcode()
-//	    {
-//	    	WebElement textarea=wait.until(ExpectedConditions.elementToBeClickable(textareaelement));
-//	    	
-//	    	//textarea.sendKeys("print \"hello\"");
-//	    }
-	    
-	    
+
 	    
 	 // Method to get the output from the console
 	    public String getConsoleOutput() {
@@ -285,7 +253,7 @@ public class GraphPage {
 		 // Method to get the current URL
 	       public String getCurrentUrl() {
 	    	   String currentUrl =driver.getCurrentUrl();
-	    	   System.out.println("current uel"+currentUrl);
+	    	   System.out.println("current url"+currentUrl);
 	            return currentUrl;
 	        }
 
