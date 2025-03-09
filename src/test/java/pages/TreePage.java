@@ -114,7 +114,8 @@ public class TreePage {
 
 	// method to getstarted tree
 	public void clickGetstartedTree() {
-		treeGetStarted.click();
+		wait.until(ExpectedConditions.elementToBeClickable(treeGetStarted)).click();
+		
 	}
 
 	// Method to display TreePageHeading

@@ -13,17 +13,19 @@ import org.openqa.selenium.WebDriver;
 
 public class ScreenshotUtil {
 	
-	public static void takeScreenshot(WebDriver driver, String scenarioName) {
+	public static String takeScreenshot(WebDriver driver, String scenarioName) {
+		String screenshotPath = "";
         try {
             File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String screenshotPath = "screenshots/" + scenarioName + "_" + timestamp + ".png";
+            screenshotPath = "screenshots/" + scenarioName + "_" + timestamp + ".png";
 
             FileUtils.copyFile(srcFile, new File(screenshotPath));
             System.out.println("Screenshot saved: " + screenshotPath);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return screenshotPath;
     }
 	
 }

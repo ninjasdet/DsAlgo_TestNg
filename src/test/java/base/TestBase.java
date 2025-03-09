@@ -11,34 +11,38 @@ import org.testng.annotations.Parameters;
 import driverManager.DriverManager;
 import utilities.LoggerLoad;
 
-public class TestBase extends DriverManager{
+public class TestBase extends DriverManager {
 
-	@Parameters("browser")
+	@Parameters({ "browser", "headless" })
 	@BeforeMethod
-	public void setUp(@Optional("chrome") String browser) {
-       	LoggerLoad.info("Loading the driver in  "+browser);
-	
-        // Set the URL for navigation
-        String url = configReader.getApplicationUrl();
-        System.out.println("inside testbase config reader");
-        DriverManager.createDriver(browser);
-        System.out.println(browser);
-        WebDriver driver = DriverManager.getDriver();
-        System.out.println("getting driver");
-        driver.get(url);
-        driver.manage().window().maximize();
+	public void setUp(@Optional("chrome") String browser, @Optional("true") String headlessParam) {
+		LoggerLoad.info("Loading the driver in " + browser + ", Headless mode: " + headlessParam);
+		boolean headless = Boolean.parseBoolean(headlessParam);
+		// Set the URL for navigation
+		String url = configReader.getApplicationUrl();
+		LoggerLoad.info("inside testbase class");
+		DriverManager.createDriver(browser, headless);
+		WebDriver driver = DriverManager.getDriver();
+		if (driver == null) {
+			LoggerLoad.info("ERROR: WebDriver is null for \" + browser");
+		} else {
+			LoggerLoad.info("Getting inside driver");
+			driver.get(url);
+			LoggerLoad.info("Inside testBase url::" + url);
+		}
+		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().implicitlyWait( Duration.ofSeconds(configReader.getImplicitlyWait()));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-		
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(configReader.getImplicitlyWait()));
+		// driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+
 	}
 
-   @AfterMethod
-    public void tearDown() {
-    	
-    	LoggerLoad.info("-------------------------------------------------------");
-    	DriverManager.quitDriver();
-    	
-    }
-	
+	@AfterMethod
+	public void tearDown() {
+
+		LoggerLoad.info("-------------------------------------------------------");
+		DriverManager.quitDriver();
+
+	}
+
 }
