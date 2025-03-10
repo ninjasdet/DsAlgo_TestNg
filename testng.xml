@@ -17,6 +17,10 @@
 			<class name="testCases.TreeTests"/>
 			<class name="testCases.StackTests"/>
 			<class name="testCases.QueueTests"/>
+			<class name="testCases.ArrayPractice"/>
+			<class name="testCases.ArrayTests"/>
+			<class name="testCases.LinkedListTests"/>
+			<class name="testCases.RegisterTests"/>
 		</classes>
 	</test>
 
@@ -29,6 +33,10 @@
 			<class name="testCases.TreeTests"/>
 			<class name="testCases.StackTests"/>
 			<class name="testCases.QueueTests"/>
+			<class name="testCases.ArrayPractice"/>
+			<class name="testCases.ArrayTests"/>
+			<class name="testCases.LinkedListTests"/>
+			<class name="testCases.RegisterTests"/>
 		</classes>
 	</test>
 
